@@ -1,5 +1,6 @@
 import model.Artist;
 import model.Datasource;
+import model.SongArtist;
 
 import java.util.List;
 
@@ -27,6 +28,17 @@ public class Main {
             System.out.println(album);
         }
 
+        List<SongArtist> songArtists = datasource.queryArtistsForSong("Jar of Hearts", datasource.ORDER_BY_ASC);
+        if (songArtists == null) {
+            System.out.println("Couldn't find the artist");
+            return;
+        }
+        for (SongArtist artist : songArtists) {
+            System.out.println("Artist Name = " + artist.getArtistName() + ", Album Name = " + artist.getAlbumName() +
+                    " Track = " + artist.getTrack());
+        }
+
+        datasource.querySongsMetadata();
 
         datasource.close();
     }
